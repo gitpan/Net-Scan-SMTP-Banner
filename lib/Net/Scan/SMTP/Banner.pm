@@ -7,7 +7,7 @@ use base qw(Class::Accessor::Fast);
 use Carp;
 use IO::Socket;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 $VERSION = eval $VERSION;
 
 __PACKAGE__->mk_accessors( qw(host port timeout debug));
@@ -20,7 +20,7 @@ sub scan {
 	my $host    = $self->host;
 	my $port    = $self->port    || 25;
 	my $timeout = $self->timeout || 8;
-	my $debug   = $self->timeout || 0;
+	my $debug   = $self->debug   || 0;
 
 	my $maxlen  = 1024;
 
@@ -31,31 +31,29 @@ sub scan {
 		Timeout  => $timeout
 	);
 
-	if ($connect){
+	if ($connect) {
 
 		my $version;
 		
 		$SIG{ALRM} = \&timed_out;
-		eval{
+		eval {
 			alarm($timeout);
 			$connect->recv($version,$maxlen);
 			close $connect;
 			alarm(0);
 		};
 
-		if ($version){
+		if ($version) {
 			chomp $version;
 			return $version;
 		}
-	} else{
-	#	if ($debug){
+	} else {
 		return "connection refused" if $debug;
-	#	}
 	}
 }
 
-sub timed_out{
-	die "timeout while connecting to server";
+sub timed_out {
+	croak "timeout while connecting to server";
 }
 
 1;
@@ -130,7 +128,7 @@ nmap L<http://www.insecure.org/nmap/>
 
 =head1 AUTHOR
 
-Matteo Cantoni, E<lt>mcantoni@cpan.orgE<gt>
+Matteo Cantoni, E<lt>mcantoni@nothink.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 

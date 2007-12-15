@@ -1,4 +1,4 @@
-Net-Scan-SMTP-Banner version 0.01
+Net-Scan-SMTP-Banner version 0.02
 =================================
 
 This module permit to grab the banner message from a SMTP server.

@@ -10,5 +10,5 @@ WriteMakefile(
 
     ($] >= 5.005 ?
       (ABSTRACT       => 'This module permit to grab the banner message from a SMTP server.',
-       AUTHOR         => 'Matteo Cantoni <mcantoni@cpan.org>') : ()),
+       AUTHOR         => 'Matteo Cantoni <mcantoni@nothink.org>') : ()),
 );

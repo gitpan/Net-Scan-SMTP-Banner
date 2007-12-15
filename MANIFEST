@@ -5,3 +5,4 @@ MANIFEST
 README
 t/Banner.t
 lib/Net/Scan/SMTP/Banner.pm
+META.yml                                 Module meta-data (added by MakeMaker)
